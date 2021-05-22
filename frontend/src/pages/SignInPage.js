@@ -36,7 +36,7 @@ export default function SignInPage() {
             <div className="signin-joinus-panel">
                 <h2>Not registered yet?</h2>
                 <p>Create new account and join to picUpload users!</p>
-                <button className="submit-button signup-button"><Link to="/signup">Sign Up</Link></button>
+                <Link to="/signup"><button className="submit-button signup-button">Sign Up</button></Link>
             </div>
         </div>
 

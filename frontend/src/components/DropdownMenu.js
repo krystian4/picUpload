@@ -20,7 +20,7 @@ export default function DropdownMenu() {
             </React.Fragment> :
                 <React.Fragment>
                     <DropdownItem url="/signin">Sign In</DropdownItem>
-                    <DropdownItem url="#">Register</DropdownItem>
+                    <DropdownItem url="/signup">Register</DropdownItem>
                 </React.Fragment>
             }
 
