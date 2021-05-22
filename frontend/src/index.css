@@ -1,3 +1,6 @@
+*{
+  box-sizing: border-box;
+}
 body {
   margin: 0;
   height: 100vh;
@@ -6,7 +9,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
+  background-color: var(--body-color);
 }
 
 code {
@@ -18,6 +21,7 @@ code {
   height: 100%;
   --bg:  #242526;
   --bg-accent: #484a4d;
+  --body-color: #f6f5f7;
   --text-color: #dadce1;
   --nav-size: 60px;
   --border: 1px solid #474a4d;
@@ -114,3 +118,81 @@ a{
 .dropdown-item:hover{
   background-color: #525357;
 }
+
+/* Form */
+.form-window{
+  position: absolute;
+  top: 300px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  width: 700px;
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 3px 25px #1b1b1b;
+  overflow: hidden;
+  display: flex;
+}
+
+form {
+	background-color: #FFFFFF;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	padding: 0px 50px 50px 50px;
+	height: 100%;
+	text-align: center;
+}
+
+input {
+	background-color: #eee;
+	border: none;
+	padding: 12px 15px;
+	margin: 8px 0;
+	width: 100%;
+}
+.submit-button{
+  width: 170px;
+  height: 40px;
+  line-height: 1;
+  font-size: 18px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  border: 3px solid var(--bg);
+  background: var(--bg-accent);
+  color: #fff;
+  border-radius: 40px;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all .35s;
+}
+
+.submit-button:hover{
+  filter: brightness(1.5);
+  color: #98999e;
+}
+
+.signin-joinus-panel{
+  display: flex;
+  flex-direction: column;
+  background-color: #696c70;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.signup-button{
+  border: 2px solid black;
+  background-color: var(--body-color);
+  color: black;
+}
+.signup-button:hover{
+  background-color: #1b1b1b;
+  color: white;
+}
+.signup-button a{
+  color: inherit;
+}
+
