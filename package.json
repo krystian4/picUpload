@@ -1,33 +1,40 @@
 {
   "name": "uploadpicturestool",
+  "type": "module",
   "version": "1.0.0",
   "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
   "main": "index.js",
   "dependencies": {
     "argparse": "^1.0.10",
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
     "import-fresh": "^3.3.0",
     "js-yaml": "^3.14.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.12.10",
     "parent-module": "^1.0.1",
-    "path-key": "^3.1.1",
     "path-is-absolute": "^1.0.1",
+    "path-key": "^3.1.1",
     "prelude-ls": "^1.2.1",
     "punycode": "^2.1.1",
-    "resolve-from": "^4.0.0",
     "require-from-string": "^2.0.2",
+    "resolve-from": "^4.0.0",
     "shebang-command": "^2.0.0",
-    "sprintf-js": "^1.0.3",
-    "slice-ansi": "^4.0.0",
-    "string-width": "^4.2.2",
     "shebang-regex": "^3.0.0",
+    "slice-ansi": "^4.0.0",
+    "sprintf-js": "^1.0.3",
+    "string-width": "^4.2.2",
     "strip-ansi": "^6.0.0",
     "strip-json-comments": "^3.1.1"
   },
   "devDependencies": {
     "eslint": "^7.26.0",
-    "eslint-plugin-react": "^7.23.2"
+    "eslint-plugin-react": "^7.23.2",
+    "nodemon": "^2.0.7"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon --watch backend --exec node --experimental-modules backend/server.js"
   },
   "repository": {
     "type": "git",

@@ -1,8 +1,12 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 
 export default function DropdownMenu() {
     const [user, setUser] = useState(undefined);
+
+    useEffect(() => {
+        setUser(JSON.parse(localStorage.getItem('user')))
+    }, [])
 
     function DropdownItem(props) {
         return (
