@@ -1,11 +1,72 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useEffect, useState } from 'react';
+import { Link, Redirect } from 'react-router-dom';
+import axios from 'axios';
+import LoadingIcon from '../components/LoadingIcon';
 
-export default function SignUpPage() {
+export default function SignUpPage(props) {
+    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('');
+    const [passwordConfirmed, setPasswordConfirmed] = useState(false);
+    const [error, setError] = useState('');
+    const [user, setUser] = useState();
+    const [loading, setLoading] = useState(true)
+
+    useEffect(() => {
+        let loggedInUser = localStorage.getItem('user');
+        if(loggedInUser){
+            setUser(JSON.parse(loggedInUser));
+        }
+        setLoading(false);
+    }, [])
+    function handlePasswordValidation(password){
+        if(password.length < 6){
+            console.log("Password too short!");
+            setError('Password must have at least 6 characters!');
+            setPasswordConfirmed(false);
+            return;
+        }
+        setError('');
+    }
+
+    function handlePasswordConfirmation(value){
+        if(password !== value){
+            console.log("Password confirmation failed!");
+            setError('Passwords are not the same!');
+            setPasswordConfirmed(false);
+            return;
+        }
+        setError('');
+        setPasswordConfirmed(true);
+    }
+
+    const submitHandler = (e) => {
+        e.preventDefault();
+        if(!passwordConfirmed) return;
+
+        axios.post('/api/users/signup', { username, email, password })
+            .then(response => {
+                console.log(response.data);
+                props.history.push('/signin');
+            })
+            .catch(error => {
+                console.log(error.response.data.message);
+                setError(error.response.data.message);
+            });
+        console.log('submit')
+    };
+
+    if(loading){
+        return <LoadingIcon />
+    }
+    if (user) {
+        return <Redirect to={"/"} />;
+      } 
+
     return (
         <div className="form-window">
             <div className="signup-panel">
-                <form className="form">
+                <form className="form" onSubmit={submitHandler}>
                     <h1>Sign In</h1>
                     <div>
                         <label htmlFor="username">Username</label>
@@ -14,6 +75,8 @@ export default function SignUpPage() {
                             id="username"
                             placeholder="Username..."
                             required
+                            autoComplete="username"
+                            onChange={(e) => setUsername(e.target.value)}
                         ></input>
                     </div>
                     <div>
@@ -23,6 +86,7 @@ export default function SignUpPage() {
                             id="email"
                             placeholder="Email..."
                             required
+                            onChange={(e) => setEmail(e.target.value)}
                         ></input>
                     </div>
                     <div>
@@ -32,6 +96,9 @@ export default function SignUpPage() {
                             id="password"
                             placeholder="Password..."
                             required
+                            autoComplete="new-password"
+                            onChange={(e) => setPassword(e.target.value)}
+                            onBlur={(e) => handlePasswordValidation(e.target.value)}
                         ></input>
                     </div>
                     <div>
@@ -41,8 +108,11 @@ export default function SignUpPage() {
                             id="rpassword"
                             placeholder="Repeat password..."
                             required
+                            autoComplete="new-password"
+                            onBlur={(e) => handlePasswordConfirmation(e.target.value)}
                         ></input>
                     </div>
+                    {error && <div className="error-msg">{error}</div>}
                     <div>
                         <label />
                         <button className="submit-button" type="submit">

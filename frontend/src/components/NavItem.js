@@ -18,12 +18,19 @@ useEffect(() => {
     }
     setOpen(false);
   };
+  
+  const childrenWithProps = React.Children.map(props.children, (child, index) => {
+    return React.cloneElement(child, {
+      open,
+      setOpen,
+    });
+  });
 
     return (
         <li className="nav-item" ref={node}>
             <Link to={props.url} className="icon-button" onClick={()=>setOpen(!open)}>{props.icon}</Link>
 
-            {open && props.children}
+            {open && childrenWithProps}
         </li>
     );
 }

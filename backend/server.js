@@ -18,8 +18,7 @@ mongoose.connect(process.env.MONGODB_URL || 'mongodb://localhost/picUpload',{
 const port = process.env.PORT || 5000;
 
 app.get('/', (req, res) =>{
-    res.send('Server is ready');
-    console.log('Server started');
+    res.send('Server is readyyy');
 });
 
 //routers

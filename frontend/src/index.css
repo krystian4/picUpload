@@ -201,3 +201,8 @@ input {
   color: inherit;
 }
 
+.error-msg{
+  color: red;
+  padding-bottom: 0.8rem;
+}
+
