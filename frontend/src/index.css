@@ -156,6 +156,11 @@ input {
 	margin: 8px 0;
 	width: 260px;
 }
+
+.file-input{
+  display: none;
+}
+
 .submit-button{
   width: 170px;
   height: 40px;
@@ -206,3 +211,19 @@ input {
   padding-bottom: 0.8rem;
 }
 
+/* ---------------MAIN--------------- */
+.container{
+  max-width: 900px;
+  min-height: 100vh;
+  margin: 0 auto;
+  z-index: 1;
+  background-color: #f9f9fa;
+  box-shadow: 0 3px 25px #1b1b1b;
+}
+
+/* ---------------IMAGE UPLOAD--------------- */
+.img-preview{
+  background-color: var(--bg);
+  max-width: 600px;
+  max-height: 600px;
+}

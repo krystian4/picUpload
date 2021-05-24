@@ -18,7 +18,7 @@ export default function SignInPage(props) {
         setLoading(false);
     }, [])
 
-    const submitHandler = (e) => {
+    function submitHandler(e) {
         e.preventDefault();
         axios.post('/api/users/signin', { username, password })
             .then(response => {

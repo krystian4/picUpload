@@ -13,6 +13,7 @@
     "js-yaml": "^3.14.1",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.12.10",
+    "multer": "^1.4.2",
     "parent-module": "^1.0.1",
     "path-is-absolute": "^1.0.1",
     "path-key": "^3.1.1",
