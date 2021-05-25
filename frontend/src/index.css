@@ -214,16 +214,120 @@ input {
 /* ---------------MAIN--------------- */
 .container{
   max-width: 900px;
-  min-height: 100vh;
   margin: 0 auto;
   z-index: 1;
   background-color: #f9f9fa;
   box-shadow: 0 3px 25px #1b1b1b;
+  border-radius: 25px;
+  text-align: center;
+  justify-content: center;
+  padding-bottom: 1rem;
+}
+.container h1{
+  font-family: 'Inter';
+  font-size: 3rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid #dbdbdd;
 }
 
+.container form{
+  background-color: #f9f9fa;
+  padding-bottom: 1rem;
+}
+
+.container form textarea{
+  font-family: 'Roboto', sans-serif;
+  color: #333;
+  font-size: 1.2rem;
+  margin: 1rem 0;
+  padding: 1.5rem 2rem;
+  border-radius: 0.2rem;
+  background-color: rgb(255, 255, 255);
+  border: 2px solid #dfdfdf;
+  width: 610px;
+  min-height: 10rem;
+  display: block;
+  transition: all 0.3s;
+  resize: none;
+}
 /* ---------------IMAGE UPLOAD--------------- */
 .img-preview{
-  background-color: var(--bg);
-  max-width: 600px;
-  max-height: 600px;
+  background-color: var(--body-color);
+  padding: 10px;
+  width: 610px;
+  height: 610px;
+  margin-top: 1rem;
+  border: 2px solid #dfdfdf;
+  border-radius: 25px;
+  justify-content: center;
+}
+
+.img-preview img{
+  max-height: 100%;
+  max-width: 100%;
+  object-fit: scale-down;
+}
+.img-preview span{
+  color: var(--bg-accent);
+  font-size: 3rem;
+}
+
+.alert-box{
+  background-color: #54da54;
+  border: 2px solid #2da52d;
+  border-radius: 5px;
+  margin-top: 1rem;
+  padding: 0.5rem;
+}
+
+.error-box{
+  background-color: #c0443b;
+  border: 2px solid #9c1919;
+  border-radius: 5px;
+  margin-top: 1rem;
+  padding: 0.5rem;
+}
+
+/* ---------------HOME PAGE IMAGES--------------- */
+
+.img-card{
+  background-color: var(--body-color);
+  padding: 10px;
+  width: 610px;
+  margin-top: 1rem;
+  border: 2px solid #dfdfdf;
+  border-radius: 25px;
+  margin: 2rem auto;
+}
+
+.img-card img{
+  max-height: 100%;
+  max-width: 100%;
+  object-fit: scale-down;
+  border-radius: 25px;
+}
+
+.username-section{
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #dbdbdd;
+}
+
+.username-section .username{
+  font-weight: 700;
+  padding-left: 1rem;
+}
+
+.date{
+  color: var(--bg-accent);
+  padding-top: 0.5rem;
+  font-size: 0.8rem;
+}
+
+.description{
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  padding-top: 0.5rem;
+  padding-left: 1rem;
 }

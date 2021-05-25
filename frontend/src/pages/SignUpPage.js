@@ -67,7 +67,7 @@ export default function SignUpPage(props) {
         <div className="form-window">
             <div className="signup-panel">
                 <form className="form" onSubmit={submitHandler}>
-                    <h1>Sign In</h1>
+                    <h1>Sign Up</h1>
                     <div>
                         <label htmlFor="username">Username</label>
                         <input

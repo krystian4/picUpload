@@ -19,40 +19,26 @@ imageRouter.post('/upload', async (req, res) => {
 
     const user = JSON.parse(req.body.user);
     const image = new Image({
-      '_userId': mongoose.Types.ObjectId(user._id),
+      'username': user.username,
       'description': req.body.description,
       'imageName': req.file.originalname,
     })
     await image.save();
 
     res.status(200).send({
-      message: "Uploaded the file successfully: " + req.file.originalname,
+      message: "Uploaded the file successfully!",
     });
   } catch (err) {
     res.status(500).send({
-      message: `Could not upload the file: ${req.file.originalname}. ${err}`,
+      message: `Could not upload the file! ${err}`,
     });
   }
 })
 
 imageRouter.get('/get-list', async (req, res) => {
-  fs.readdir(__basedir + imagesStoragePath, function (err, files) {
-    if (err) {
-      res.status(500).send({
-        message: "Unable to scan files!",
-      });
-    }
-
-    let fileInfos = [];
-
-    files.forEach(file => {
-      fileInfos.push({
-        name: file,
-        url: baseUrl + file,
-      })
-    });
-    res.status(200).send(fileInfos);
-  });
+  let imagesList = await Image.find().lean();
+  imagesList = imagesList.map(image=>({...image, url : baseUrl + image.imageName}));
+  res.status(200).send(imagesList);
 })
 
 export default imageRouter;
