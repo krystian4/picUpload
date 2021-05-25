@@ -25,22 +25,27 @@ export default function UploadPage() {
     }
 
     function fileChangedHandler(event) {
+        console.log(event.target.files[0])
         setImage(event.target.files[0]);
-        setPictureURL(URL.createObjectURL(event.target.files[0]))
+        setPictureURL(URL.createObjectURL(event.target.files[0]));
     }
 
     function inputButtonClick(e) {
         e.preventDefault();
         uploadInputRef.current.click();
+
     }
+
+
 
     function uploadHandler(e) {
         e.preventDefault();
         console.log('upload start');
-
+        let fileExt = '.' + image.name.split('.')[1];
+        let fileName =  image.name.split('.')[0] + new Date().getTime().toString() + fileExt;
         let formData = new FormData();
 
-        formData.append("image", image);
+        formData.append("image", image, fileName);
         formData.append("description", description);
         formData.append("user", JSON.stringify(user));
 

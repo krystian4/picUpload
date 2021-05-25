@@ -2,51 +2,57 @@ import express from 'express';
 import mongoose from 'mongoose';
 import Image from '../models/imageModel.js';
 import uploadFileMiddleWare from '../middleware/upload.js';
+import fs from 'fs';
 
-
-
+//const fs = require('fs');
 const imageRouter = express.Router();
+const imagesStoragePath = '/assets/uploads/';
+const baseUrl = "http://localhost:5000/";
 
-imageRouter.post('/upload', async(req, res)=>{
-    //console.log(req.body);
-    //console.log(req.files);
+imageRouter.post('/upload', async (req, res) => {
+  try {
+    await uploadFileMiddleWare(req, res);
 
-    try {
+    if (req.file == undefined) {
+      return res.status(400).send({ message: "Please upload a file!" });
+    }
 
-        await uploadFileMiddleWare(req, res);
-        console.log(req.body.description);
-        console.log(JSON.parse(req.body.user));
+    const user = JSON.parse(req.body.user);
+    const image = new Image({
+      '_userId': mongoose.Types.ObjectId(user._id),
+      'description': req.body.description,
+      'imageName': req.file.originalname,
+    })
+    await image.save();
 
-        //console.log(req);
-        console.log(req.file);
+    res.status(200).send({
+      message: "Uploaded the file successfully: " + req.file.originalname,
+    });
+  } catch (err) {
+    res.status(500).send({
+      message: `Could not upload the file: ${req.file.originalname}. ${err}`,
+    });
+  }
+})
 
-        if (req.file == undefined) {
-          return res.status(400).send({ message: "Please upload a file!" });
-        }
-    
-        const user = JSON.parse(req.body.user);
-        // console.log(mongoose.Types.ObjectId(user._id));
-        // console.log(req.body.description);
-        // console.log("./assets/uploads/" + req.file.originalname);
-        const image = new Image({
-                '_userId': mongoose.Types.ObjectId(user._id),
-                'description': req.body.description,
-                'imageURL' : "./assets/uploads/" + req.file.originalname,
-        })
-        await image.save();
+imageRouter.get('/get-list', async (req, res) => {
+  fs.readdir(__basedir + imagesStoragePath, function (err, files) {
+    if (err) {
+      res.status(500).send({
+        message: "Unable to scan files!",
+      });
+    }
 
+    let fileInfos = [];
 
-        res.status(200).send({
-          message: "Uploaded the file successfully: " + req.file.originalname,
-        });
-      } catch (err) {
-          console.log(err);
-        res.status(500).send({
-          message: `Could not upload the file: ${req.file.originalname}. ${err}`,
-        });
-      }
-      
-
+    files.forEach(file => {
+      fileInfos.push({
+        name: file,
+        url: baseUrl + file,
+      })
+    });
+    res.status(200).send(fileInfos);
+  });
 })
 
 export default imageRouter;
